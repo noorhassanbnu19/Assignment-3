@@ -1,0 +1,66 @@
+#include <iostream>
+#include <vector>
+#include <string>
+using namespace std;
+
+// define employee structure
+struct Employee
+{
+    string name;
+    int age;
+    vector<string> skills;
+};
+
+int main()
+{
+    int num;
+    cout << "Enter number of employees: ";
+    cin >> num;
+
+    vector<Employee> employees;
+
+    for(int i = 0; i < num; i++)
+    {
+        Employee emp;
+        int skillCount;
+
+        cout << "\nEmployee " << i + 1 << endl;
+
+        cout << "Enter name: ";
+        cin >> emp.name;
+
+        cout << "Enter age: ";
+        cin >> emp.age;
+
+        cout << "How many skills: ";
+        cin >> skillCount;
+
+        for(int j = 0; j < skillCount; j++)
+        {
+            string skill;
+            cout << "Enter skill " << j + 1 << ": ";
+            cin >> skill;
+            emp.skills.push_back(skill);
+        }
+
+        employees.push_back(emp);
+    }
+
+    // display employee details
+    cout << "\nEmployee Details\n";
+    for(int i = 0; i < employees.size(); i++)
+    {
+        cout << "\nEmployee " << i + 1 << endl;
+        cout << "Name: " << employees[i].name << endl;
+        cout << "Age: " << employees[i].age << endl;
+        cout << "Skills: ";
+
+        for(int j = 0; j < employees[i].skills.size(); j++)
+        {
+            cout << employees[i].skills[j] << " ";
+        }
+        cout << endl;
+    }
+
+    return 0;
+}
