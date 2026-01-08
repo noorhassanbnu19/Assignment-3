@@ -1,0 +1,86 @@
+#include <iostream>
+using namespace std;
+
+const int DAYS = 7;
+const int TIMES = 4;
+
+// Function to input temperature data
+void inputTemp(int temp[DAYS][TIMES])
+{
+    for (int i = 0; i < DAYS; i++)
+    {
+        cout << "Enter temperatures for Day " << i + 1 << endl;
+        for (int j = 0; j < TIMES; j++)
+        {
+            cout << "Time " << j + 1 << ": ";
+            cin >> temp[i][j];
+        }
+    }
+}
+
+// Function to find highest and lowest temperature
+void findHighLow(int temp[DAYS][TIMES], int &highest, int &lowest)
+{
+    highest = temp[0][0];
+    lowest = temp[0][0];
+
+    for (int i = 0; i < DAYS; i++)
+    {
+        for (int j = 0; j < TIMES; j++)
+        {
+            if (temp[i][j] > highest)
+                highest = temp[i][j];
+
+            if (temp[i][j] < lowest)
+                lowest = temp[i][j];
+        }
+    }
+}
+
+// Function to calculate average temperature of each day
+void calculateAverage(int temp[DAYS][TIMES], float avg[DAYS])
+{
+    for (int i = 0; i < DAYS; i++)
+    {
+        int sum = 0;
+        for (int j = 0; j < TIMES; j++)
+        {
+            sum += temp[i][j];
+        }
+        avg[i] = sum / 4.0;
+    }
+}
+
+// Function to display table
+void display(int temp[DAYS][TIMES], float avg[DAYS], int high, int low)
+{
+    cout << "\nTemperature Table\n";
+    cout << "Day\tT1\tT2\tT3\tT4\tAverage\n";
+
+    for (int i = 0; i < DAYS; i++)
+    {
+        cout << i + 1 << "\t";
+        for (int j = 0; j < TIMES; j++)
+        {
+            cout << temp[i][j] << "\t";
+        }
+        cout << avg[i] << endl;
+    }
+
+    cout << "\nHighest Temperature: " << high << endl;
+    cout << "Lowest Temperature: " << low << endl;
+}
+
+int main()
+{
+    int temperature[DAYS][TIMES];
+    float average[DAYS];
+    int highest, lowest;
+
+    inputTemp(temperature);
+    findHighLow(temperature, highest, lowest);
+    calculateAverage(temperature, average);
+    display(temperature, average, highest, lowest);
+
+    return 0;
+}
